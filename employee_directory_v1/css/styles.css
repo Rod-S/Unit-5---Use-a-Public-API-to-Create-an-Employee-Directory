@@ -1,0 +1,41 @@
+/* gallery display */
+.photos {
+  display: block;
+}
+
+.photos ul { list-style: none; }
+
+.photos ul li { display: inline; }
+
+.photos ul li a {
+  display: block;
+  float: left;
+  padding: 4px;
+  margin-right: 10px;
+  margin-bottom: 7px;
+  opacity: 0.75;
+  -webkit-transition: all 0.3s linear;
+  -moz-transition: all 0.3s linear;
+  transition: all 0.3s linear;
+}
+.photos ul li a:hover {
+  opacity: 1.0;
+}
+
+.photos ul li a img {
+  border: 6px solid #e1d9ec;
+}
+/* lightbox hacks */
+#lightbox-container-image-data-box {
+  -webkit-box-sizing: content-box;
+  -moz-box-sizing: content-box;
+  box-sizing: content-box;
+}
+
+/** uncomment to remove lightbox captions
+ *
+#lightbox-container-image-data-box {
+  display: none !important;
+}
+ *
+**/

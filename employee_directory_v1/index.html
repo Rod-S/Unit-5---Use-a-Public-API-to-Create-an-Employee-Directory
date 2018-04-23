@@ -1,0 +1,36 @@
+<!doctype html>
+<html lang="en-US">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=utf-8">
+  <title>jQuery Lightbox Image Thumbnail Gallery</title>
+  <meta name="author" content="Jake Rocheleau">
+  <link rel="shortcut icon" href="http://teamtreehouse.com/assets/favicon.ico">
+  <link rel="icon" href="http://teamtreehouse.com/assets/favicon.ico">
+  <link rel="stylesheet" type="text/css" media="all" href="css/styles.css">
+  <link rel="stylesheet" type="text/css" media="all" href="../jquery-lightbox-by-leandrovieira-master/css/jquery.lightbox-0.5.css">
+  <link rel="stylesheet" type="text/css" media="all" href="http://fonts.googleapis.com/css?family=Lato|Skranji:700">
+  <script type="text/javascript" charset="utf-8" src="http://code.jquery.com/jquery-3.3.1.min.js"></script>
+  <script type="text/javascript" charset="utf-8" src="../jquery-lightbox-by-leandrovieira-master/js/jquery.lightbox-0.5.wenbert.js"></script>
+</head>
+<body>
+  <div class="photos">
+  <ul class="clearfix">
+    <!-- ATTRIBUTION: http://dribbble.com/shots/963800-New-App-design -->
+    <li><a href="images/photos/01-app-design-iphone.png" rel="lightbox" title="Designed by <a href='http://dribbble.com/shots/963800-New-App-design' target='_blank'>Natalia Berowska</a>"><img src="images/photos/01-app-design-iphone-thumb.png" width="150" height="150"></a></li>
+
+    <!-- ATTRIBUTION: http://dribbble.com/shots/963671-Navigation -->
+    <li><a href="images/photos/02-ios-side-navigation.png" rel="lightbox" title="Designed by <a href='http://dribbble.com/shots/963671-Navigation' target='_blank'>Matt D. Smith</a>"><img src="images/photos/02-ios-side-navigation-thumb.png" width="150" height="150"></a></li>
+    <script type="text/javascript">
+    $(function(){
+      $('a[rel=lightbox]').lightBox({
+        containerResizeSpeed: 250,
+        fixedNavigation: true
+      });
+      $('a[rel=2ndlightbox]').lightBox({
+        overlayBgColor: '#fff',
+        overlayOpacity: 0.7
+      });
+    });
+    </script>
+</body>
+</html>
