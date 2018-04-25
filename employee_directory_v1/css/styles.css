@@ -1,13 +1,19 @@
 /* gallery display */
-.photos {
+.employees {
   display: block;
+
 }
 
-.photos ul { list-style: none; }
+.employees ul { list-style: none;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-gap: 10px;
 
-.photos ul li { display: inline; }
+ }
 
-.photos ul li a {
+.employees ul li { display: inline; }
+
+.employees ul li a {
   display: block;
   float: left;
   padding: 4px;
@@ -18,11 +24,11 @@
   -moz-transition: all 0.3s linear;
   transition: all 0.3s linear;
 }
-.photos ul li a:hover {
+.employees ul li a:hover {
   opacity: 1.0;
 }
 
-.photos ul li a img {
+.employees ul li a img {
   border: 6px solid #e1d9ec;
 }
 /* lightbox hacks */
