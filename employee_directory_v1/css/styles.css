@@ -1,3 +1,17 @@
+html {
+  background-color: #FFF0F5;
+}
+
+.header {
+
+}
+
+.header h2 {
+  color: #808080;
+  font-family: verdana;
+  padding-left: 40px;
+}
+
 /* gallery display */
 .employees {
   display: block;
@@ -7,11 +21,17 @@
 .employees ul { list-style: none;
   display: grid;
   grid-template-columns: repeat(3, 1fr);
-  grid-gap: 10px;
+  grid-gap: 30px;
 
  }
 
-.employees ul li { display: inline; }
+.employees ul li {
+  display: inline-block;
+  background-color: white;
+  border-radius: 2.5%;
+  border-style: solid;
+  border-color: #C0C0C0;
+}
 
 .employees ul li a {
   display: block;
@@ -29,8 +49,15 @@
 }
 
 .employees ul li a img {
-  border: 6px solid #e1d9ec;
+  border-radius: 50%;
 }
+
+.employees ul li a:link {
+  text-decoration: none;
+  color: black;
+  font-family: arial;
+}
+
 /* lightbox hacks */
 #lightbox-container-image-data-box {
   -webkit-box-sizing: content-box;

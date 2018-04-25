@@ -1,5 +1,7 @@
 $(document).ready(function () {
 
+
+
   $.ajax({
     url: 'https://randomuser.me/api/?results=12',
     dataType: 'json',
