@@ -6,6 +6,7 @@ html {
   padding-right: 50px;
   padding-left: 50px;
   padding-top: 20px;
+  padding-bottom: 20px;
 }
 
 .name {
@@ -13,7 +14,7 @@ html {
   margin-top: 0;
   font-size: 1.3em;
   text-transform: capitalize;
-  font-family: initial;
+  font-weight: bolder;
 }
 
 .email,
@@ -29,7 +30,7 @@ html {
 .header h2 {
   color: #808080;
   font-family: verdana;
-  padding-left: 41px;
+  padding-left: 3rem;
   margin-top: 30px;
 }
 
@@ -76,6 +77,11 @@ html {
   font-family: arial;
 }
 
+img {
+  overflow: hidden;
+
+}
+
 .employees ul li a img {
   border-radius: 50%;
   margin-right: 20px;
@@ -85,6 +91,8 @@ html {
 .employees ul li a p {
   display: block;
   margin-left: 45%;
+  word-wrap: break-word;
+  text-decoration: none;
 }
 
 
