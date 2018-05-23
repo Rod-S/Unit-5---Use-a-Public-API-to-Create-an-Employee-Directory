@@ -1,4 +1,4 @@
-$(document).ready(function () {
+$(document).ready(function ($) {
 
 
 
@@ -22,11 +22,14 @@ $(document).ready(function () {
     }
   }); //end ajax
 
-  $(this).click(function(event) {
+  $('body').on('click', 'li', function(event) {
+
     event.preventDefault();
-    var image_href = $(this).attr('href');
-    console.log(image_href);
-  	// Code that makes the lightbox appear
+    var image_href = $(this).children().get(0);
+    console.log($(this).get(0));
+    console.log($(this).children().get(0));
+
+    // Code that makes the lightbox appear
     if ($('#lightbox').length > 0) { // #lightbox exists
     	//insert img tag with clicked link's href as src value
     	$('#content').html('<img src="' + image_href + '" />');
@@ -38,7 +41,7 @@ $(document).ready(function () {
       	'<div id="lightbox">' +
       		'<p>Click to close</p>' +
       		'<div id="content">' + //insert clicked link's href into img src
-      			'<img src="' + image_href +'" />' +
+      			'<img src="' + image_href +'">' +
       		'</div>' +
       	'</div>';
     	//insert lightbox HTML into page
@@ -46,8 +49,8 @@ $(document).ready(function () {
     }
   });
 
-  $('#lightbox').on('click', function() {
-  	$('#lightbox').hide();
+  $('body').on('click', 'p', function() {
+  	$('#lightbox').remove();
   });
 
 }); //end ready
