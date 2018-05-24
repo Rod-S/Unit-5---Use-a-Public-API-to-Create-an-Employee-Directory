@@ -112,6 +112,7 @@ img {
     -webkit-box-shadow:0 0 25px #111;
     -moz-box-shadow:0 0 25px #111;
     max-width:940px;
+
 }
 
 /*lightbox plugin css props */
@@ -137,9 +138,11 @@ img {
 #lightbox-container-image-box {
 	position: relative;
 	background-color: #fff;
-	width: 250px;
+	width: 275px;
 	height: 250px;
-	margin: 0 auto;
+	margin: auto;
+  margin-top: 100px;
+  border-radius: 2%;
 }
 #lightbox-container-image { padding: 10px; }
 #lightbox-loading {
@@ -200,7 +203,26 @@ img {
 	padding-bottom: 1.0em;
 }
 #lightbox-secNav-btnClose {
+
 	width: 66px;
 	float: right;
 	padding-bottom: 0.7em;
+}
+
+#closeBtn {
+  padding-left: 75%;
+  border-radius: 0;
+  box-shadow:none;
+  -webkit-box-shadow:none;
+  -moz-box-shadow:none;
+}
+
+#closeBtn img {
+  box-shadow:none;
+  -webkit-box-shadow:none;
+  -moz-box-shadow:none;
+}
+
+#lightbox-container-image img {
+  border-radius: 50%;
 }

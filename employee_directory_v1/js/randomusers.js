@@ -38,18 +38,40 @@ $(document).ready(function ($) {
     } else { //#lightbox does not exist
     	//create HTML markup for lightbox window
     	var lightbox =
-      	'<div id="lightbox">' +
+      /*	'<div id="lightbox">' +
       		'<p>Click to close</p>' +
       		'<div id="content">' + //insert clicked link's href into img src
       			'<img src="' + image_href +'">' +
       		'</div>' +
       	'</div>';
+        */
+        `<div id="jquery-overlay"></div>
+          <div id="lightbox">
+            <div id="lightbox-container-image-box">
+            <div id="closeBtn">
+              <a href="#" id="lightbox-secNav-btnClose"> </a>
+              <img src="../employee_directory_v1/images/lightbox-btn-close.gif">
+            </div>
+              <div id="lightbox-container-image">
+
+              <img src="${image_href}" id="lightbox-image">
+              <div id="lightbox-nav">
+                <a href="#" id="lightbox-nav-btnPrev"></a>
+                <a href="#" id="lightbox-nav-btnNext"></a>
+              </div>
+              </div>
+            </div>
+          </div>
+          `;
+
     	//insert lightbox HTML into page
     	$('body').append(lightbox);
+
+
     }
   });
 
-  $('body').on('click', 'p', function() {
+  $('#closeBtn').on('click', 'a', function() {
   	$('#lightbox').remove();
   });
 
