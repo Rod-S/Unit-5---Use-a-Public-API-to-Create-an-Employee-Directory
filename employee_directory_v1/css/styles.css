@@ -3,10 +3,19 @@ html {
 }
 
 .clearfix {
-  padding-right: 50px;
-  padding-left: 50px;
+  padding-right: 175px;
+  padding-left: 175px;
   padding-top: 20px;
   padding-bottom: 20px;
+}
+
+.modalName {
+  font-weight: 900;
+  margin-top: 10px;
+  font-size: 1.3em;
+  text-transform: capitalize;
+  font-family: Trebuchet MS;
+  color: #535353;
 }
 
 .name {
@@ -16,22 +25,32 @@ html {
   text-transform: capitalize;
   font-weight: bolder;
   font-family: Trebuchet MS;
+  color: #636363;
 }
 
 .email,
-.city {
+.city,
+.address,
+.phone,
+.birthday,
+.username,
+.underline {
   color: #808080;
   font-family: Trebuchet MS;
 }
 
-.city {
+.city,
+.address,
+.username {
   text-transform: capitalize;
 }
 
-.header h2 {
+
+
+.header h3 {
   color: #808080;
   font-family: verdana;
-  padding-left: 3rem;
+  padding-left: 11rem;
   margin-top: 30px;
 }
 
@@ -87,6 +106,7 @@ img {
   border-radius: 50%;
   margin-right: 20px;
   position: absolute;
+  -webkit-box-shadow:0 0 10px #111;
 }
 
 .employees ul li a p {
@@ -134,16 +154,20 @@ img {
 	text-align: center;
 	line-height: 0;
 }
-#jquery-lightbox a img { border: none; }
+#jquery-lightbox a img {
+  border: none;
+}
+
 #lightbox-container-image-box {
 	position: relative;
 	background-color: #fff;
-	width: 275px;
-	height: 250px;
+	width: 400px;
+	height: 475px;
 	margin: auto;
   margin-top: 100px;
   border-radius: 2%;
 }
+
 #lightbox-container-image { padding: 10px; }
 #lightbox-loading {
 	position: absolute;
@@ -154,6 +178,7 @@ img {
 	text-align: center;
 	line-height: 0;
 }
+
 #lightbox-nav {
 	position: absolute;
 	top: 0;
@@ -162,6 +187,7 @@ img {
 	width: 100%;
 	z-index: 10;
 }
+
 #lightbox-container-image-box > #lightbox-nav { left: 0; }
 #lightbox-nav a { outline: none;}
 #lightbox-nav-btnPrev, #lightbox-nav-btnNext {
@@ -225,4 +251,16 @@ img {
 
 #lightbox-container-image img {
   border-radius: 50%;
+}
+
+@media only screen and (max-width: 1665px) {
+  li img {
+    width: 100px;
+    height: 100px;
+  }
+}
+
+.employee-search {
+  float:right;
+  margin-right: 10%;
 }
