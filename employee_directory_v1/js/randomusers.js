@@ -1,15 +1,16 @@
 $(document).ready(function ($) {
 
+var JSONItems = [];
 
+$.ajax({
 
-  $.ajax({
     url: 'https://randomuser.me/api/?results=12&nat=us',
     dataType: 'json',
     success: function(data) {
       console.log(data);
       var employeeHTML = '<ul class="clearfix">';
       $.each(data.results, function(i, employee) {
-        employeeHTML += '<li><a href="'+ employee.picture.large + '" class="lightbox_trigger"';
+        employeeHTML += '<li class="employee"><a href="'+ employee.picture.large + '" class="lightbox_trigger"';
         employeeHTML += '</a>';
         employeeHTML += '<img src="' + employee.picture.large + '" width="150" height="150"';
         employeeHTML += `<h4><p class="name">${employee.name.first} ${employee.name.last}</p>`;
@@ -28,12 +29,24 @@ $(document).ready(function ($) {
       $('.address').hide();
       $('.birthday').hide();
       $('.username').hide();
+
+
+      window.JSONItems = data.results;
+
+
+      console.log($('.clearfix li'));
+    window.empArray = $.makeArray($('.clearfix li'));
     }
   }); //end ajax
 
-  $('body').on('click', 'li', function(event) {
 
+
+
+  $('body').on('click', 'li', function(event) {
     event.preventDefault();
+
+    console.log($(this));
+
     var image_href = $(this).children().get(0);
     var name = $(this).find('p.name').text();
     var email = $(this).find('p.email').text();
@@ -44,6 +57,7 @@ $(document).ready(function ($) {
     var birthdayYear = $(this).find('p.birthday').text().slice(0,4);
     var birthdayMonth = $(this).find('p.birthday').text().slice(5,7);
     var birthdayDay = $(this).find('p.birthday').text().slice(8,10);
+
     // Code that makes the lightbox appear
     if ($('#lightbox').length > 0) { // #lightbox exists
     	//insert img tag with clicked link's href as src value
@@ -53,19 +67,20 @@ $(document).ready(function ($) {
     } else { //#lightbox does not exist
     	//create HTML markup for lightbox window
     	var lightbox =
-      /*	'<div id="lightbox">' +
-      		'<p>Click to close</p>' +
-      		'<div id="content">' + //insert clicked link's href into img src
-      			'<img src="' + image_href +'">' +
-      		'</div>' +
-      	'</div>';
-        */
           `
            <div id="lightbox">
             <div id="lightbox-container-image-box">
               <div id="closeBtn">
                 <a href="#" id="lightbox-secNav-btnClose"> </a>
                 <img src="../employee_directory_v1/images/lightbox-btn-close.gif">
+              </div>
+              <div id ="prevBtn">
+                <a href="#" id="lightbox-secNav-btnPrev"> </a>
+                <img src="../employee_directory_v1/images/lightbox-btn-prev.gif">
+              </div>
+              <div id ="nextBtn">
+                <a href="#" id="lightbox-secNav-btnNext"> </a>
+                <img src="../employee_directory_v1/images/lightbox-btn-next.gif">
               </div>
               <div id="lightbox-container-image">
                 <img src="${image_href}" id="lightbox-image">
@@ -93,12 +108,103 @@ $(document).ready(function ($) {
   	$('#lightbox').remove();
   });
 
+  $('body').on('click', '#prevBtn', function () {
+
+    var prevImage_href = Li.prev().children().get(0);
+    var prevName = Li.prev().find('p.name').text();
+    var prevEmail = Li.prev().find('p.email').text();
+    var prevUsername = Li.prev().find('p.username').text();
+    var prevPhone = Li.prev().find('p.phone').text();
+    var prevAddress = Li.prev().find('p.address').text();
+    var prevBirthday = Li.prev().find('p.birthday').text().slice(0,10);
+    var prevBirthdayYear = Li.prev().find('p.birthday').text().slice(0,4);
+    var prevBirthdayMonth = Li.prev().find('p.birthday').text().slice(5,7);
+    var prevBirthdayDay = Li.prev().find('p.birthday').text().slice(8,10);
+    var lightbox =
+        `
+         <div id="lightbox">
+          <div id="lightbox-container-image-box">
+            <div id="closeBtn">
+              <a href="#" id="lightbox-secNav-btnClose"> </a>
+              <img src="../employee_directory_v1/images/lightbox-btn-close.gif">
+            </div>
+            <div id ="prevBtn">
+              <a href="#" id="lightbox-secNav-btnPrev"> </a>
+              <img src="../employee_directory_v1/images/lightbox-btn-prev.gif">
+            </div>
+            <div id ="nextBtn">
+              <a href="#" id="lightbox-secNav-btnNext"> </a>
+              <img src="../employee_directory_v1/images/lightbox-btn-next.gif">
+            </div>
+            <div id="lightbox-container-image">
+              <img src="${prevImage_href}" id="lightbox-image">
+            </div>
+            <div id="employee-data">
+              <p class="modalName">${prevName}</p>
+              <p class="email">${prevEmail}</p>
+              <p class="username">${prevUsername}</p>
+              <p class="underline">_________________________________</p>
+              <p class="phone">${prevPhone}</p>
+              <p class="address">${prevAddress}</p>
+              <p class="birthday">Birthday: ${prevBirthdayMonth}/${prevBirthdayDay}/${prevBirthdayYear}</p>
+            </div>
+          </div>
+        </div>`;
+    $('body').append(lightbox);
+    $('#lightbox').remove();
+  });
+
+  $('body').on('click', '#nextBtn', function () {
+    var nextImage_href = Li.next().children().get(0);
+    var nextName = Li.next().find('p.name').text();
+    var nextEmail = Li.next().find('p.email').text();
+    var nextUsername = Li.next().find('p.username').text();
+    var nextPhone = Li.next().find('p.phone').text();
+    var nextAddress = Li.next().find('p.address').text();
+    var nextBirthday = Li.next().find('p.birthday').text().slice(0,10);
+    var nextBirthdayYear = Li.next().find('p.birthday').text().slice(0,4);
+    var nextBirthdayMonth = Li.next().find('p.birthday').text().slice(5,7);
+    var nextBirthdayDay = Li.next().find('p.birthday').text().slice(8,10);
+    var lightbox =
+        `
+         <div id="lightbox">
+          <div id="lightbox-container-image-box">
+            <div id="closeBtn">
+              <a href="#" id="lightbox-secNav-btnClose"> </a>
+              <img src="../employee_directory_v1/images/lightbox-btn-close.gif">
+            </div>
+            <div id ="prevBtn">
+              <a href="#" id="lightbox-secNav-btnPrev"> </a>
+              <img src="../employee_directory_v1/images/lightbox-btn-prev.gif">
+            </div>
+            <div id ="nextBtn">
+              <a href="#" id="lightbox-secNav-btnNext"> </a>
+              <img src="../employee_directory_v1/images/lightbox-btn-next.gif">
+            </div>
+            <div id="lightbox-container-image">
+              <img src="${nextImage_href}" id="lightbox-image">
+            </div>
+            <div id="employee-data">
+              <p class="modalName">${nextName}</p>
+              <p class="email">${nextEmail}</p>
+              <p class="username">${nextUsername}</p>
+              <p class="underline">_________________________________</p>
+              <p class="phone">${nextPhone}</p>
+              <p class="address">${nextAddress}</p>
+              <p class="birthday">Birthday: ${nextBirthdayMonth}/${nextBirthdayDay}/${nextBirthdayYear}</p>
+            </div>
+          </div>
+        </div>`;
+    $('body').append(lightbox);
+    $('#lightbox').remove();
+  });
+
   //creation of input box, button and student search functionality
   function searchList(employeeList) {
     $('.header h3').append('<div class="employee-search"><input id=search placeholder="Search for employees..."><button id=searchButton>Search</button>');
     $('#searchButton').on("click", function() {
       //removal of DOM message to avoid duplication during multiple failed search attempts
-      //$('#noStudent').remove();
+      $('.notFound').remove();
       //remove class to avoid previously matched students from appearing
       $('.clearfix li').removeClass('match');
       let searchFilter = $(this).prev().val().toUpperCase();
@@ -134,6 +240,7 @@ $(document).ready(function ($) {
         $('.pagination').remove();
         //Remove previous div containing input/button to avoid duplication
         $('.student-search').remove();
+        $('.header').append(`<h3 class="notFound">No Employees Found.</h3>`);
         //call defaultLoad function
         defaultLoad();
       }
@@ -149,12 +256,35 @@ $(document).ready(function ($) {
   $('#search').keyup(function(){
    var valThis = $(this).val().toLowerCase();
    $('.clearfix li').each(function(){
+      $(this).removeClass('nameMatch');
+      $(this).removeClass('userMatch');
+      $(this).removeClass('noNameMatch');
+      $(this).removeClass('noUserMatch');
       var name = $(this).find('p.name').text().toLowerCase();
       var user = $(this).find('p.username').text().toLowerCase();
-      console.log($(this).text());
-      (name.indexOf(valThis) > -1) ? $(this).show() : $(this).hide();
-      //(user.indexOf(valThis) > -1) ? $(this).show() : $(this).hide();
-      //? $(this).show() : $(this).hide();
+      /* (name.indexOf(valThis) > -1) ? $(this).addClass('nameMatch') : $(this).addClass('noNameMatch');
+      (user.indexOf(valThis) > -1) ? $(this).addClass('userMatch') : $(this).addClass('noUserMatch');
+      */
+      if (name.indexOf(valThis) > -1) {
+        $(this).addClass('nameMatch').show();
+      } else if (name.indexOf(valThis) == -1) {
+        $(this).addClass('noNameMatch');
+      }
+      if (user.indexOf(valThis) > -1) {
+        $(this).addClass('userMatch').show();
+      } else if (user.indexOf(valThis) == -1) {
+        $(this).addClass('noUserMatch');
+      }
+      if ($(this).hasClass('noNameMatch')) {
+        if ($(this).hasClass('noUserMatch')) {
+          $(this).hide();
+        }
+      }
+      if ($(this).hasClass('noUserMatch')) {
+        if ($(this).hasClass('noNameMatch')) {
+          $(this).hide();
+        }
+      }
     });
   });
 
