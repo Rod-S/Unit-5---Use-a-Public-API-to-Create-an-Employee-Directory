@@ -31,11 +31,8 @@ $.ajax({
       $('.username').hide();
 
 
-      window.JSONItems = data.results;
-
-
-      console.log($('.clearfix li'));
-    window.empArray = $.makeArray($('.clearfix li'));
+      //window.JSONItems = data.results;
+      window.empArray = $.makeArray($('.clearfix li:visible'));
     }
   }); //end ajax
 
@@ -45,7 +42,11 @@ $.ajax({
   $('body').on('click', 'li', function(event) {
     event.preventDefault();
 
+    console.log(empArray);
     console.log($(this));
+    window.currentIndex = empArray.indexOf(this);
+    console.log($(empArray[currentIndex]).find('p.name').text());
+
 
     var image_href = $(this).children().get(0);
     var name = $(this).find('p.name').text();
@@ -109,17 +110,18 @@ $.ajax({
   });
 
   $('body').on('click', '#prevBtn', function () {
-
-    var prevImage_href = Li.prev().children().get(0);
-    var prevName = Li.prev().find('p.name').text();
-    var prevEmail = Li.prev().find('p.email').text();
-    var prevUsername = Li.prev().find('p.username').text();
-    var prevPhone = Li.prev().find('p.phone').text();
-    var prevAddress = Li.prev().find('p.address').text();
-    var prevBirthday = Li.prev().find('p.birthday').text().slice(0,10);
-    var prevBirthdayYear = Li.prev().find('p.birthday').text().slice(0,4);
-    var prevBirthdayMonth = Li.prev().find('p.birthday').text().slice(5,7);
-    var prevBirthdayDay = Li.prev().find('p.birthday').text().slice(8,10);
+    if (currentIndex == 0) {return}
+    window.currentIndex = currentIndex - 1;
+    var prevImage_href = $(empArray[currentIndex]).children().get(0);
+    var prevName = $(empArray[currentIndex]).find('p.name').text();
+    var prevEmail = $(empArray[currentIndex]).find('p.email').text();
+    var prevUsername = $(empArray[currentIndex]).find('p.username').text();
+    var prevPhone = $(empArray[currentIndex]).find('p.phone').text();
+    var prevAddress = $(empArray[currentIndex]).find('p.address').text();
+    var prevBirthday = $(empArray[currentIndex]).find('p.birthday').text().slice(0,10);
+    var prevBirthdayYear = $(empArray[currentIndex]).find('p.birthday').text().slice(0,4);
+    var prevBirthdayMonth = $(empArray[currentIndex]).find('p.birthday').text().slice(5,7);
+    var prevBirthdayDay = $(empArray[currentIndex]).find('p.birthday').text().slice(8,10);
     var lightbox =
         `
          <div id="lightbox">
@@ -155,16 +157,19 @@ $.ajax({
   });
 
   $('body').on('click', '#nextBtn', function () {
-    var nextImage_href = Li.next().children().get(0);
-    var nextName = Li.next().find('p.name').text();
-    var nextEmail = Li.next().find('p.email').text();
-    var nextUsername = Li.next().find('p.username').text();
-    var nextPhone = Li.next().find('p.phone').text();
-    var nextAddress = Li.next().find('p.address').text();
-    var nextBirthday = Li.next().find('p.birthday').text().slice(0,10);
-    var nextBirthdayYear = Li.next().find('p.birthday').text().slice(0,4);
-    var nextBirthdayMonth = Li.next().find('p.birthday').text().slice(5,7);
-    var nextBirthdayDay = Li.next().find('p.birthday').text().slice(8,10);
+    if (currentIndex == empArray.length-1) {return}
+    window.currentIndex = currentIndex+1;
+    var nextImage_href = $(empArray[currentIndex]).children().get(0);
+    var nextName = $(empArray[currentIndex]).find('p.name').text();
+    var nextEmail = $(empArray[currentIndex]).find('p.email').text();
+    var nextUsername = $(empArray[currentIndex]).find('p.username').text();
+    var nextPhone = $(empArray[currentIndex]).find('p.phone').text();
+    var nextAddress = $(empArray[currentIndex]).find('p.address').text();
+    var nextBirthday = $(empArray[currentIndex]).find('p.birthday').text().slice(0,10);
+    var nextBirthdayYear = $(empArray[currentIndex]).find('p.birthday').text().slice(0,4);
+    var nextBirthdayMonth = $(empArray[currentIndex]).find('p.birthday').text().slice(5,7);
+    var nextBirthdayDay = $(empArray[currentIndex]).find('p.birthday').text().slice(8,10);
+
     var lightbox =
         `
          <div id="lightbox">
@@ -265,6 +270,8 @@ $.ajax({
       /* (name.indexOf(valThis) > -1) ? $(this).addClass('nameMatch') : $(this).addClass('noNameMatch');
       (user.indexOf(valThis) > -1) ? $(this).addClass('userMatch') : $(this).addClass('noUserMatch');
       */
+      //window.empArray = $('li:visible');
+      window.empArray = $.makeArray($('.clearfix li:visible'))
       if (name.indexOf(valThis) > -1) {
         $(this).addClass('nameMatch').show();
       } else if (name.indexOf(valThis) == -1) {
