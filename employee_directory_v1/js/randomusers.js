@@ -1,6 +1,16 @@
 $(document).ready(function ($) {
 
 var JSONItems = [];
+var image_href;
+var name;
+var email;
+var username;
+var phone;
+var address;
+var birthday;
+var birthdayYear;
+var birthdayMonth;
+var birthday;
 
 $.ajax({
 
@@ -44,16 +54,16 @@ $.ajax({
 
     window.currentIndex = empArray.indexOf(this);
 
-    var image_href = $(this).children().get(0);
-    var name = $(this).find('p.name').text();
-    var email = $(this).find('p.email').text();
-    var username = $(this).find('p.username').text();
-    var phone = $(this).find('p.phone').text();
-    var address = $(this).find('p.address').text();
-    var birthday = $(this).find('p.birthday').text().slice(0,10);
-    var birthdayYear = $(this).find('p.birthday').text().slice(0,4);
-    var birthdayMonth = $(this).find('p.birthday').text().slice(5,7);
-    var birthdayDay = $(this).find('p.birthday').text().slice(8,10);
+    image_href = $(this).children().get(0);
+    name = $(this).find('p.name').text();
+    email = $(this).find('p.email').text();
+    username = $(this).find('p.username').text();
+    phone = $(this).find('p.phone').text();
+    address = $(this).find('p.address').text();
+    birthday = $(this).find('p.birthday').text().slice(0,10);
+    birthdayYear = $(this).find('p.birthday').text().slice(0,4);
+    birthdayMonth = $(this).find('p.birthday').text().slice(5,7);
+    birthdayDay = $(this).find('p.birthday').text().slice(8,10);
 
     // Code that makes the lightbox appear
     if ($('#lightbox').length > 0) { // #lightbox exists
@@ -106,22 +116,19 @@ $.ajax({
   });
 
   $('body').on('click', '#prevBtn', function () {
-      console.log(currentIndex);
-      if (currentIndex == 2) {$('#prevBtn img').hide()}
-      if (currentIndex == 0) {return}
 
+    if (currentIndex == 0) {return}
     window.currentIndex = currentIndex - 1;
-
-    var prevImage_href = $(empArray[currentIndex]).children().get(0);
-    var prevName = $(empArray[currentIndex]).find('p.name').text();
-    var prevEmail = $(empArray[currentIndex]).find('p.email').text();
-    var prevUsername = $(empArray[currentIndex]).find('p.username').text();
-    var prevPhone = $(empArray[currentIndex]).find('p.phone').text();
-    var prevAddress = $(empArray[currentIndex]).find('p.address').text();
-    var prevBirthday = $(empArray[currentIndex]).find('p.birthday').text().slice(0,10);
-    var prevBirthdayYear = $(empArray[currentIndex]).find('p.birthday').text().slice(0,4);
-    var prevBirthdayMonth = $(empArray[currentIndex]).find('p.birthday').text().slice(5,7);
-    var prevBirthdayDay = $(empArray[currentIndex]).find('p.birthday').text().slice(8,10);
+    image_href = $(empArray[currentIndex]).children().get(0);
+    name = $(empArray[currentIndex]).find('p.name').text();
+    email = $(empArray[currentIndex]).find('p.email').text();
+    username = $(empArray[currentIndex]).find('p.username').text();
+    phone = $(empArray[currentIndex]).find('p.phone').text();
+    address = $(empArray[currentIndex]).find('p.address').text();
+    birthday = $(empArray[currentIndex]).find('p.birthday').text().slice(0,10);
+    birthdayYear = $(empArray[currentIndex]).find('p.birthday').text().slice(0,4);
+    birthdayMonth = $(empArray[currentIndex]).find('p.birthday').text().slice(5,7);
+    birthdayDay = $(empArray[currentIndex]).find('p.birthday').text().slice(8,10);
     var lightbox =
         `
          <div id="lightbox">
@@ -139,16 +146,16 @@ $.ajax({
               <img src="../employee_directory_v1/images/lightbox-btn-next.gif">
             </div>
             <div id="lightbox-container-image">
-              <img src="${prevImage_href}" id="lightbox-image">
+              <img src="${image_href}" id="lightbox-image">
             </div>
             <div id="employee-data">
-              <p class="modalName">${prevName}</p>
-              <p class="email">${prevEmail}</p>
-              <p class="username">${prevUsername}</p>
+              <p class="modalName">${name}</p>
+              <p class="email">${email}</p>
+              <p class="username">${username}</p>
               <p class="underline">_________________________________</p>
-              <p class="phone">${prevPhone}</p>
-              <p class="address">${prevAddress}</p>
-              <p class="birthday">Birthday: ${prevBirthdayMonth}/${prevBirthdayDay}/${prevBirthdayYear}</p>
+              <p class="phone">${phone}</p>
+              <p class="address">${address}</p>
+              <p class="birthday">Birthday: ${birthdayMonth}/${birthdayDay}/${birthdayYear}</p>
             </div>
           </div>
         </div>`;
@@ -157,19 +164,20 @@ $.ajax({
     $('#lightbox').remove();
   });
 
+//next user button results functionality
   $('body').on('click', '#nextBtn', function () {
     if (currentIndex == empArray.length-1) {return}
     window.currentIndex = currentIndex+1;
-    var nextImage_href = $(empArray[currentIndex]).children().get(0);
-    var nextName = $(empArray[currentIndex]).find('p.name').text();
-    var nextEmail = $(empArray[currentIndex]).find('p.email').text();
-    var nextUsername = $(empArray[currentIndex]).find('p.username').text();
-    var nextPhone = $(empArray[currentIndex]).find('p.phone').text();
-    var nextAddress = $(empArray[currentIndex]).find('p.address').text();
-    var nextBirthday = $(empArray[currentIndex]).find('p.birthday').text().slice(0,10);
-    var nextBirthdayYear = $(empArray[currentIndex]).find('p.birthday').text().slice(0,4);
-    var nextBirthdayMonth = $(empArray[currentIndex]).find('p.birthday').text().slice(5,7);
-    var nextBirthdayDay = $(empArray[currentIndex]).find('p.birthday').text().slice(8,10);
+    image_href = $(empArray[currentIndex]).children().get(0);
+    name = $(empArray[currentIndex]).find('p.name').text();
+    email = $(empArray[currentIndex]).find('p.email').text();
+    username = $(empArray[currentIndex]).find('p.username').text();
+    phone = $(empArray[currentIndex]).find('p.phone').text();
+    address = $(empArray[currentIndex]).find('p.address').text();
+    birthday = $(empArray[currentIndex]).find('p.birthday').text().slice(0,10);
+    birthdayYear = $(empArray[currentIndex]).find('p.birthday').text().slice(0,4);
+    birthdayMonth = $(empArray[currentIndex]).find('p.birthday').text().slice(5,7);
+    birthdayDay = $(empArray[currentIndex]).find('p.birthday').text().slice(8,10);
 
     var lightbox =
         `
@@ -188,32 +196,32 @@ $.ajax({
               <img src="../employee_directory_v1/images/lightbox-btn-next.gif">
             </div>
             <div id="lightbox-container-image">
-              <img src="${nextImage_href}" id="lightbox-image">
+              <img src="${image_href}" id="lightbox-image">
             </div>
             <div id="employee-data">
-              <p class="modalName">${nextName}</p>
-              <p class="email">${nextEmail}</p>
-              <p class="username">${nextUsername}</p>
+              <p class="modalName">${name}</p>
+              <p class="email">${email}</p>
+              <p class="username">${username}</p>
               <p class="underline">_________________________________</p>
-              <p class="phone">${nextPhone}</p>
-              <p class="address">${nextAddress}</p>
-              <p class="birthday">Birthday: ${nextBirthdayMonth}/${nextBirthdayDay}/${nextBirthdayYear}</p>
+              <p class="phone">${phone}</p>
+              <p class="address">${address}</p>
+              <p class="birthday">Birthday: ${birthdayMonth}/${birthdayDay}/${birthdayYear}</p>
             </div>
           </div>
         </div>`;
     $('body').append(lightbox);
     $('#lightbox').remove();
-
   });
 
-  //creation of input box, button and student search functionality
+
+  //creation of employee search textbox
   function searchList(employeeList) {
     $('.header h3').append('<div class="employee-search"><input id=search placeholder="Search for employees...">');
 
   };
   searchList();
 
-
+//name and username filter functionality
   $('#search').keyup(function(){
    var valThis = $(this).val().toLowerCase();
    $('.clearfix li').each(function(){
