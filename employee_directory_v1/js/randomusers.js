@@ -42,11 +42,7 @@ $.ajax({
   $('body').on('click', 'li', function(event) {
     event.preventDefault();
 
-    console.log(empArray);
-    console.log($(this));
     window.currentIndex = empArray.indexOf(this);
-    console.log($(empArray[currentIndex]).find('p.name').text());
-
 
     var image_href = $(this).children().get(0);
     var name = $(this).find('p.name').text();
@@ -110,8 +106,12 @@ $.ajax({
   });
 
   $('body').on('click', '#prevBtn', function () {
-    if (currentIndex == 0) {return}
+      console.log(currentIndex);
+      if (currentIndex == 2) {$('#prevBtn img').hide()}
+      if (currentIndex == 0) {return}
+
     window.currentIndex = currentIndex - 1;
+
     var prevImage_href = $(empArray[currentIndex]).children().get(0);
     var prevName = $(empArray[currentIndex]).find('p.name').text();
     var prevEmail = $(empArray[currentIndex]).find('p.email').text();
@@ -153,6 +153,7 @@ $.ajax({
           </div>
         </div>`;
     $('body').append(lightbox);
+
     $('#lightbox').remove();
   });
 
@@ -202,60 +203,15 @@ $.ajax({
         </div>`;
     $('body').append(lightbox);
     $('#lightbox').remove();
+
   });
 
   //creation of input box, button and student search functionality
   function searchList(employeeList) {
-    $('.header h3').append('<div class="employee-search"><input id=search placeholder="Search for employees..."><button id=searchButton>Search</button>');
-    $('#searchButton').on("click", function() {
-      //removal of DOM message to avoid duplication during multiple failed search attempts
-      $('.notFound').remove();
-      //remove class to avoid previously matched students from appearing
-      $('.clearfix li').removeClass('match');
-      let searchFilter = $(this).prev().val().toUpperCase();
-      //conditional that takes input value and checks against h3(student name) or email class(student email)
-      //then hides or shows names based on checks
-      if (searchFilter != '') {
-        //show or hide elements that are matched to searchFilter input
-        $(studentList).find("h3:Contains(" + searchFilter + ")").parent().parent().show();
-        $(studentList).find(".email:Contains(" + searchFilter + ")").parent().parent().show();
-        $(studentList).find("h3:not(:Contains(" + searchFilter + "))").parent().parent().hide();
-        $(studentList).find(".email:not(:Contains(" + searchFilter +"))").parent().parent().hide();
-        //add class for matched students that are now visible
-        $('.student-item:visible').addClass('match');
-        //place matched students in variable
-        $match = $('.match');
-        //remove previous pagination div to avoid link duplication
-        $('.pagination').remove();
-        //call appendPageLinks on new student list: $match
-        if ($match.length > 10){
+    $('.header h3').append('<div class="employee-search"><input id=search placeholder="Search for employees...">');
 
-        };
-        //conditional for message to append to DOM if no students found
-        if ($('.student-item').is(':visible') == false) {
-          //remove class to avoid previously matched students from appearing
-          $('li').removeClass('match');
-          //conditional for alert to run if input box is blank
-          $('.student-list').prepend('<div id=noStudent><h2>No Students Found with Name or Email:  ' + $(this).prev().val() + '  </h2></div>');
-        }
-      } else if (searchFilter == '') {
-        //remove class to avoid previously matched students from appearing
-        $('li').removeClass('match');
-        //Remove pagination div to avoid pageLink duplication between $match and original studentList
-        $('.pagination').remove();
-        //Remove previous div containing input/button to avoid duplication
-        $('.student-search').remove();
-        $('.header').append(`<h3 class="notFound">No Employees Found.</h3>`);
-        //call defaultLoad function
-        defaultLoad();
-      }
-    });
   };
   searchList();
-
-  const defaultLoad = () => {
-    $('.clearfix li').hide();
-    }
 
 
   $('#search').keyup(function(){
@@ -267,10 +223,7 @@ $.ajax({
       $(this).removeClass('noUserMatch');
       var name = $(this).find('p.name').text().toLowerCase();
       var user = $(this).find('p.username').text().toLowerCase();
-      /* (name.indexOf(valThis) > -1) ? $(this).addClass('nameMatch') : $(this).addClass('noNameMatch');
-      (user.indexOf(valThis) > -1) ? $(this).addClass('userMatch') : $(this).addClass('noUserMatch');
-      */
-      //window.empArray = $('li:visible');
+
       window.empArray = $.makeArray($('.clearfix li:visible'))
       if (name.indexOf(valThis) > -1) {
         $(this).addClass('nameMatch').show();
