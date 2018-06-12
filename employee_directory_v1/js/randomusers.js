@@ -1,5 +1,6 @@
 $(document).ready(function ($) {
 
+//creation of employee data vars for use in modal window
 var JSONItems = [];
 var image_href;
 var name;
@@ -12,12 +13,14 @@ var birthdayYear;
 var birthdayMonth;
 var birthday;
 
+//get randomuser API data for employee data
 $.ajax({
 
     url: 'https://randomuser.me/api/?results=12&nat=us',
     dataType: 'json',
     success: function(data) {
-      console.log(data);
+
+      //creation of 12 user LI's with specific object data inserted into DOM
       var employeeHTML = '<ul class="clearfix">';
       $.each(data.results, function(i, employee) {
         employeeHTML += '<li class="employee"><a href="'+ employee.picture.large + '" class="lightbox_trigger"';
@@ -34,26 +37,19 @@ $.ajax({
       }); //end each
       employeeHTML += '</ul>';
       $('.employees').html(employeeHTML);
-
       $('.phone').hide();
       $('.address').hide();
       $('.birthday').hide();
       $('.username').hide();
-
-
-      //window.JSONItems = data.results;
+      //store data from ajax request in an array
       window.empArray = $.makeArray($('.clearfix li:visible'));
     }
   }); //end ajax
 
-
-
-
   $('body').on('click', 'li', function(event) {
     event.preventDefault();
-
+    //designate clicked user as the currently tracked index
     window.currentIndex = empArray.indexOf(this);
-
     image_href = $(this).children().get(0);
     name = $(this).find('p.name').text();
     email = $(this).find('p.email').text();
@@ -64,15 +60,7 @@ $.ajax({
     birthdayYear = $(this).find('p.birthday').text().slice(0,4);
     birthdayMonth = $(this).find('p.birthday').text().slice(5,7);
     birthdayDay = $(this).find('p.birthday').text().slice(8,10);
-
-    // Code that makes the lightbox appear
-    if ($('#lightbox').length > 0) { // #lightbox exists
-    	//insert img tag with clicked link's href as src value
-    	$('#content').html('<img src="' + image_href + '" />');
-    	//show lightbox window - you can use a transition here if you want, i.e. .show('fast')
-    	$('#lightbox').show();
-    } else { //#lightbox does not exist
-    	//create HTML markup for lightbox window
+      //modal window template with data retrieved from JSON object array
     	var lightbox =
           `
            <div id="lightbox">
@@ -106,18 +94,17 @@ $.ajax({
 
     	//insert lightbox HTML into page
     	$('body').append(lightbox);
-
-
-    }
   });
 
+  //close modal window
   $('body').on('click', '#closeBtn', function() {
   	$('#lightbox').remove();
   });
 
+  //previous user button results functionality
   $('body').on('click', '#prevBtn', function () {
-
     if (currentIndex == 0) {return}
+    //decrease index by 1 and replace current employee data with next user data
     window.currentIndex = currentIndex - 1;
     image_href = $(empArray[currentIndex]).children().get(0);
     name = $(empArray[currentIndex]).find('p.name').text();
@@ -164,9 +151,11 @@ $.ajax({
     $('#lightbox').remove();
   });
 
-//next user button results functionality
+  //next user button results functionality
   $('body').on('click', '#nextBtn', function () {
+    //prevent index from going below 0
     if (currentIndex == empArray.length-1) {return}
+    //increase index by 1 and replace current employee data with next user data
     window.currentIndex = currentIndex+1;
     image_href = $(empArray[currentIndex]).children().get(0);
     name = $(empArray[currentIndex]).find('p.name').text();
@@ -224,6 +213,7 @@ $.ajax({
 //name and username filter functionality
   $('#search').keyup(function(){
    var valThis = $(this).val().toLowerCase();
+
    $('.clearfix li').each(function(){
       $(this).removeClass('nameMatch');
       $(this).removeClass('userMatch');
@@ -231,8 +221,8 @@ $.ajax({
       $(this).removeClass('noUserMatch');
       var name = $(this).find('p.name').text().toLowerCase();
       var user = $(this).find('p.username').text().toLowerCase();
-
-      window.empArray = $.makeArray($('.clearfix li:visible'))
+      //create new array of users based on search filter to navigate back and forth
+      window.empArray = $.makeArray($('.clearfix li:visible'));
       if (name.indexOf(valThis) > -1) {
         $(this).addClass('nameMatch').show();
       } else if (name.indexOf(valThis) == -1) {
