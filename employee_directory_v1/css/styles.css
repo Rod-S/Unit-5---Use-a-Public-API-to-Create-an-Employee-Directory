@@ -73,6 +73,9 @@ html {
   padding-bottom: 20px;
   padding-right: 25px;
   padding-left: 25px;
+  -webkit-transition: all 0.3s linear;
+  -moz-transition: all 0.3s linear;
+  transition: all 0.3s linear;
 }
 
 .employees ul li a {
@@ -86,9 +89,12 @@ html {
 }
 .employees ul li a:hover {
   opacity: 1.0;
-  
+
 }
 
+.employees:hover {
+  opacity: 1.0;
+}
 
 
 .employees ul li a:link {
