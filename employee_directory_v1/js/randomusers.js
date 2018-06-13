@@ -58,6 +58,8 @@ ajax1();
 
 $.when(ajax1()).done(searchList());
 
+
+  //create modal window when clicking an employee's li
   $('body').on('click', 'li', function(event) {
     event.preventDefault();
     //designate clicked user as the currently tracked index
