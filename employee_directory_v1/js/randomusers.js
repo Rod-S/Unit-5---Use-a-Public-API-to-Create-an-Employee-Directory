@@ -1,20 +1,28 @@
 $(document).ready(function ($) {
 
-//creation of employee data vars for use in modal window
-var JSONItems = [];
-var image_href;
-var name;
-var email;
-var username;
-var phone;
-var address;
-var birthday;
-var birthdayYear;
-var birthdayMonth;
-var birthday;
+  //data vars for use in modal window
 
-//get randomuser API data for employee data
-$.ajax({
+  var image_href;
+  var name;
+  var email;
+  var username;
+  var phone;
+  var address;
+  var birthday;
+  var birthdayYear;
+  var birthdayMonth;
+  var birthday;
+
+
+  //creation of employee search textbox
+  function searchList() {
+    $('.header h3').append('<div class="employee-search"><input id=search placeholder="Search for employees...">');
+  };
+
+
+function ajax1() {
+  //get randomuser API data for employee data
+  $.ajax({
 
     url: 'https://randomuser.me/api/?results=12&nat=us',
     dataType: 'json',
@@ -42,9 +50,13 @@ $.ajax({
       $('.birthday').hide();
       $('.username').hide();
       //store data from ajax request in an array
-      window.empArray = $.makeArray($('.clearfix li:visible'));
+      window.empArray = $.makeArray($('.clearfix li'));
     }
   }); //end ajax
+}
+ajax1();
+
+$.when(ajax1()).done(searchList());
 
   $('body').on('click', 'li', function(event) {
     event.preventDefault();
@@ -202,34 +214,29 @@ $.ajax({
     $('#lightbox').remove();
   });
 
-
-  //creation of employee search textbox
-  function searchList(employeeList) {
-    $('.header h3').append('<div class="employee-search"><input id=search placeholder="Search for employees...">');
-
-  };
-  searchList();
-
 //name and username filter functionality
   $('#search').keyup(function(){
    var valThis = $(this).val().toLowerCase();
 
+window.empArray = $.makeArray($('.clearfix li:visible'));
    $('.clearfix li').each(function(){
+
+     var name = $(this).find('p.name').text().toLowerCase();
+     var user = $(this).find('p.username').text().toLowerCase();
+
+      //remove matches from previous text input keypresses
       $(this).removeClass('nameMatch');
       $(this).removeClass('userMatch');
       $(this).removeClass('noNameMatch');
       $(this).removeClass('noUserMatch');
-      var name = $(this).find('p.name').text().toLowerCase();
-      var user = $(this).find('p.username').text().toLowerCase();
-      //create new array of users based on search filter to navigate back and forth
-      window.empArray = $.makeArray($('.clearfix li:visible'));
+
       if (name.indexOf(valThis) > -1) {
-        $(this).addClass('nameMatch').show();
+        $(this).addClass('nameMatch');
       } else if (name.indexOf(valThis) == -1) {
         $(this).addClass('noNameMatch');
       }
       if (user.indexOf(valThis) > -1) {
-        $(this).addClass('userMatch').show();
+        $(this).addClass('userMatch');
       } else if (user.indexOf(valThis) == -1) {
         $(this).addClass('noUserMatch');
       }
@@ -243,7 +250,19 @@ $.ajax({
           $(this).hide();
         }
       }
+      if ($(this).hasClass('nameMatch')) {
+        if ($(this).hasClass('userMatch')) {
+          $(this).show();
+        }
+      }
+      if ($(this).hasClass('userMatch')) {
+        if ($(this).hasClass('nameMatch')) {
+          $(this).show();
+        }
+      }
     });
+    //create new array of users based on search filter results to navigate back and forth
+    window.empArray = $.makeArray($('.clearfix li:visible'));
   });
 
 }); //end ready
