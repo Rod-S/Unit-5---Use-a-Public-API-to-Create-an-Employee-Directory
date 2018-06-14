@@ -118,7 +118,7 @@ $.when(ajax1()).done(searchList());
   //previous user button results functionality
   $('body').on('click', '#prevBtn', function () {
     if (currentIndex == 0) {return}
-    //decrease index by 1 and replace current employee data with next user data
+    //decrease index by 1 and replace current employee data with next employee data
     window.currentIndex = currentIndex - 1;
     image_href = $(empArray[currentIndex]).children().get(0);
     name = $(empArray[currentIndex]).find('p.name').text();
@@ -218,9 +218,10 @@ $.when(ajax1()).done(searchList());
 
 //name and username filter functionality
   $('#search').keyup(function(){
-   var valThis = $(this).val().toLowerCase();
 
-window.empArray = $.makeArray($('.clearfix li:visible'));
+   let valThis = $(this).val().toLowerCase();
+   window.empArray = $.makeArray($('.clearfix li:visible'));
+
    $('.clearfix li').each(function(){
 
      var name = $(this).find('p.name').text().toLowerCase();
@@ -233,12 +234,12 @@ window.empArray = $.makeArray($('.clearfix li:visible'));
       $(this).removeClass('noUserMatch');
 
       if (name.indexOf(valThis) > -1) {
-        $(this).addClass('nameMatch');
+        $(this).addClass('nameMatch').show();
       } else if (name.indexOf(valThis) == -1) {
         $(this).addClass('noNameMatch');
       }
       if (user.indexOf(valThis) > -1) {
-        $(this).addClass('userMatch');
+        $(this).addClass('userMatch').show();
       } else if (user.indexOf(valThis) == -1) {
         $(this).addClass('noUserMatch');
       }
