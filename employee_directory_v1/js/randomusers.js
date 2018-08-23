@@ -39,7 +39,7 @@ function ajax1() {
         employeeHTML += `<p class="city">${employee.location.city}, ${employee.location.state}</p></h4>`;
         employeeHTML += `<p class="phone">${employee.cell}</p>`;
         employeeHTML += `<p class="address">${employee.location.street}, ${employee.location.city}, ${employee.location.state} ${employee.location.postcode}</p>`;
-        employeeHTML += `<p class="birthday">${employee.dob}</p>`;
+        employeeHTML += `<p class="birthday">${employee.dob.date}</p>`;
         employeeHTML += `<p class="username">${employee.login.username}</p>`;
         employeeHTML += '</li>'
       }); //end each
